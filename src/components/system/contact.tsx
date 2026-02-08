@@ -1,9 +1,9 @@
+import { getTranslation } from "@/locale/common";
 import Image from "next/image";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 import { Button } from "../ui/button";
-import Link from "next/link";
-import { getTranslation } from "@/locale/common";
-import { useSearchParams } from "next/navigation";
 
 const Contact: React.FC = () => {
   const searchParams = useSearchParams();
@@ -118,7 +118,7 @@ const Contact: React.FC = () => {
             </Link>
           </div>
           <p className="text-base text-center text-[#fff] w-auto">
-            © 2025 All Rights Reserved
+            © 2026 All Rights Reserved
           </p>
         </div>
       </div>
