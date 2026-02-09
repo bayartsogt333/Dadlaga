@@ -1,18 +1,19 @@
 "use client";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useRef, useState } from "react";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import { getTranslation } from "@/locale/common";
 import emailjs from "@emailjs/browser";
+import { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-export function GetQuotesDialog() {
+export function GetQuotesDialog({ locale = "mn" }: { locale?: string }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [sending, setSending] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -33,13 +34,13 @@ export function GetQuotesDialog() {
         () => {
           formRef.current?.reset();
           setFileName(null);
-          toast.success("Амжилттай илгээгдлээ!");
+          toast.success(getTranslation(locale, "success_msg"));
           setOpen(false);
           
         },
         (error) => {
           console.error("Failed to send form", error);
-          toast.error("Илгээхэд алдаа гарлаа.");
+          toast.error(getTranslation(locale, "error_msg"));
 
         }
       )
@@ -53,19 +54,16 @@ export function GetQuotesDialog() {
         <DialogTrigger asChild>
           <Button
            className="relative bg-gradient text-black h-[40px] px-6 rounded-md font-semibold hover:scale-105 transition-transform hover:shadow z-50 overflow-hidden hover:transition-all duration-500 ease-in-out"
-          size="default"
+           size="default"
         >
-         Үнийн санал авах
+         {getTranslation(locale, "get_quotes")}
          </Button>
-          {/* <Button className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-semibold h-10 px-6 rounded-md hover:scale-105 transition-transform hover:shadow">
-            Үнийн санал авах
-          </Button>*/}
         </DialogTrigger> 
 
         <DialogContent className="bg-white p-6 rounded-xl shadow-lg max-w-lg mx-auto">
           <DialogHeader>
             <DialogTitle className="text-xl font-bold text-gray-800">
-              Үнийн санал авах маягт
+              {getTranslation(locale, "quote_form_title")}
             </DialogTitle>
           </DialogHeader>
 
@@ -73,35 +71,35 @@ export function GetQuotesDialog() {
             <input
               type="text"
               name="user_name"
-              placeholder="Нэр, Компанийн нэр"
+              placeholder={getTranslation(locale, "info_placeholder")}
               className="w-full border px-4 py-2 rounded-lg"
               required
             />
             <input
               type="email"
               name="user_email"
-              placeholder="И-мэйл хаяг"
+              placeholder={getTranslation(locale, "email_placeholder")}
               className="w-full border px-4 py-2 rounded-lg"
               required
             />
             <input
               type="tel"
               name="user_phone"
-              placeholder="Утасны дугаар"
+              placeholder={getTranslation(locale, "phone_placeholder")}
               className="w-full border px-4 py-2 rounded-lg"
               required
             />
             <input
               type="text"
               name="from_location"
-              placeholder="Хаанаас"
+              placeholder={getTranslation(locale, "from_placeholder")}
               className="w-full border px-4 py-2 rounded-lg"
               required
             />
             <input
               type="text"
               name="to_location"
-              placeholder="Хаашаа"
+              placeholder={getTranslation(locale, "to_placeholder")}
               className="w-full border px-4 py-2 rounded-lg"
               required
             />
@@ -111,11 +109,11 @@ export function GetQuotesDialog() {
               className="w-full border px-4 py-2 rounded-lg bg-yellow-100"
               required
             >
-              <option value="">Тээврийн төрлөө сонгоно уу</option>
-              <option value="Ачаа тээвэр">Агаарын тээвэр</option>
-              <option value="Зорчигч тээвэр">Түүвэр буюу Цуглуулбар ачаа</option>
-              <option value="Олон улсын тээвэр">Бүтэн машин</option>
-              <option value="Дотоодын тээвэр">Контайнер</option>
+              <option value="">{getTranslation(locale, "transport_select")}</option>
+              <option value="Ачаа тээвэр">{getTranslation(locale, "air_freight")}</option>
+              <option value="Зорчигч тээвэр">{getTranslation(locale, "groupage_freight")}</option>
+              <option value="Олон улсын тээвэр">{getTranslation(locale, "full_truck")}</option>
+              <option value="Дотоодын тээвэр">{getTranslation(locale, "container")}</option>
             </select>
 
             {/* File Upload */}
@@ -124,7 +122,7 @@ export function GetQuotesDialog() {
                 htmlFor="file-upload"
                 className="inline-block bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium py-2 px-6 rounded-lg shadow-lg cursor-pointer hover:scale-105 transition-all"
               >
-                📎 Файл хавсаргах
+                📎 {getTranslation(locale, "attach_file")}
               </label>
               <input
                 id="file-upload"
@@ -146,7 +144,7 @@ export function GetQuotesDialog() {
 
             <textarea
               name="message"
-              placeholder="Та энд нэмэлт мэдээлэл оруулна уу"
+              placeholder={getTranslation(locale, "additional_info")}
               className="w-full border px-4 py-2 rounded-lg"
               rows={4}
               required
@@ -157,7 +155,7 @@ export function GetQuotesDialog() {
               className="bg-blue-500 text-white font-semibold w-full py-2 rounded-lg hover:bg-blue-600 transition"
               disabled={sending}
             >
-              {sending ? "Илгээж байна..." : "Илгээх"}
+              {sending ? getTranslation(locale, "sending") : getTranslation(locale, "send")}
             </Button>
           </form>
         </DialogContent>

@@ -1,23 +1,22 @@
 "use client";
 
+import { GetQuotesDialog } from "@/components/system/get_quotes";
 import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
+    Drawer,
+    DrawerContent,
+    DrawerTrigger
 } from "@/components/ui/drawer";
 import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "@/components/ui/select";
 import { HEADERS, SOCIAL_LINKS } from "@/lib/config";
 import useScrollPosition from "@/lib/use_scroll";
@@ -30,7 +29,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Line } from "./Line";
-import { GetQuotesDialog } from "@/components/system/get_quotes";
 
 const Header = () => {
   const currentPath = usePathname();
@@ -175,7 +173,7 @@ const Header = () => {
               </Select>
 
               <div className="h-[40px] flex items-center">
-                <GetQuotesDialog />
+                <GetQuotesDialog locale={currentLocale} />
               </div>
               
             </div>
@@ -284,7 +282,7 @@ const HamburgerMenu = ({
               </SelectContent>
             </Select>
             <div className="h-[60px] flex items-center">
-              <GetQuotesDialog />
+              <GetQuotesDialog locale={currentLocale} />
             </div>
           </div>
         </div>
