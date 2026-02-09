@@ -173,6 +173,8 @@ const translationData = {
     sending: "Sending...",
     success_msg: "Successfully sent!",
     error_msg: "Error occurred while sending.",
+    hero_traffic_info: "Check traffic information",
+    container_information: "Container information",
     resume:
       "If you think you meet the requirements for the open position, please send your online resume to office@til.mn.",
     pull_resumes: "Donwload resume",
